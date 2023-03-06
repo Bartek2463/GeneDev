@@ -6,6 +6,8 @@ package org.example;
 public class Convert {
 
     public   String romanNumberExamples(int year){
-        return "";
+        String repeat = "I".repeat(year);
+        System.out.println(repeat);
+        return repeat;
     }
 }
