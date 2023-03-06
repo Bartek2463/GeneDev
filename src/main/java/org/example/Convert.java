@@ -6,8 +6,12 @@ package org.example;
 public class Convert {
 
     public   String romanNumberExamples(int year){
-        String repeat = "I".repeat(year);
-        System.out.println(repeat);
-        return repeat;
+        return "I".repeat(year)
+                .replace("IIIII", "V").replace("IIII", "IV")
+                .replace("VV", "X").replace("VIV", "IX")
+                .replace("XXXXX", "L").replace("XXXX", "XL")
+                .replace("LL", "C").replace("LXL", "XC")
+                .replace("CCCCC", "D").replace("CCCC", "CD")
+                .replace("DD", "M").replace("DCD", "CM");
     }
 }
