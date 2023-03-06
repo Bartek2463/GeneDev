@@ -5,7 +5,9 @@ public class Main {
 //       Convert convert = new Convert();
 //        System.out.println(convert.romanNumberExamples(4000));
 
-        Square square = new Square();
-        System.out.println(square.firstPerfectSquare(17));
+//        Square square = new Square();
+//        System.out.println(square.firstPerfectSquare(17));
+
+
     }
 }
