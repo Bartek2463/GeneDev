@@ -8,12 +8,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
 //        System.out.println(sorted(new String[]{"Pierwszy człowiek w kosmosie 12-03-1961"}));
-        System.out.println(getWord(123455));
+        System.out.println(getWord(205));
     }
     public static String[] sorted( String[] events ) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
