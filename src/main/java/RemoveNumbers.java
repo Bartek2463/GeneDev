@@ -1,5 +1,4 @@
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -7,21 +6,24 @@ import java.util.stream.IntStream;
 
 public class RemoveNumbers {
     public static int lastNumberLeft(int N, int[] A) {
-        List<Integer> collect = IntStream.of(A).sorted().boxed().collect(Collectors.toList());
-        while (collect.size() > 1) {
-            for (int i = collect.size() - 1; i >= 1; i--) {
-                if (i % 2 != 0) {
-                    Integer minInteger = collect.stream().min(Comparator.comparing(Integer::intValue)).get();
-                    collect.remove(minInteger);
-                    System.out.println("collect = " + collect);
-                } else if (i % 2 == 0) {
-                    Integer maxInteger = collect.stream().max(Comparator.comparing(Integer::intValue)).get();
-                    collect.remove(maxInteger);
-                    System.out.println("collect = " + collect);
-                }
-            }
-        }
-        return collect.get(0);
+
+        List<Integer> numbers = IntStream.of(A).sorted().boxed().collect(Collectors.toList());
+       while (numbers.size()-1>0){
+           for (int i = numbers.size()-1;i>0;i--){
+               if (i%2!=0){
+                   Integer minNumber = numbers.stream().min(Comparator.comparing(Integer::intValue)).get();
+                   numbers.remove(minNumber);
+                   System.out.println("numbers = " + numbers);
+               }else {
+                   Integer maxNumber = numbers.stream().max(Comparator.comparing(Integer::intValue)).get();
+                   numbers.remove(maxNumber);
+                   System.out.println("numbers = " + numbers);
+               }
+           }
+       }
+
+return numbers.get(0);
+
     }
 
     public static void main(String[] args) {
