@@ -1,4 +1,4 @@
-package task;
+package stream.task;
 
 import java.util.Scanner;
 import java.util.stream.IntStream;

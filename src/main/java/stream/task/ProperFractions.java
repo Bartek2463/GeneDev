@@ -1,4 +1,4 @@
-package task;
+package stream.task;
 
 public class ProperFractions {
 

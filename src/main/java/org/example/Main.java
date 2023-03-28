@@ -1,8 +1,6 @@
 package org.example;
 
-import task.ProperFractions;
-
-import java.util.Scanner;
+import stream.task.ProperFractions;
 
 public class Main {
     public static void main(String[] args) {
