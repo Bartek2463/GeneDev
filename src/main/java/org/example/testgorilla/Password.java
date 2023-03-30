@@ -1,10 +1,11 @@
 package org.example.testgorilla;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * dopoasuj z tablicy stringów według wzoru podanego w ciągu
@@ -14,91 +15,25 @@ import java.util.stream.IntStream;
  */
 public class Password {
     public static void main(String[] args) {
-        Password.controlStringPasswords(new String[]{"P@sswORD1", "20PassWORD20", "PASS6word"}, "0dro6");
+        Password.controlStringPasswords(new String[]{"P@sswOD7", "20PassW20", "PASS6word"}, "4dro6");
     }
 
     public static String controlStringPasswords(String password[], String control) {
-        int upperCaseControlString;
-        int sumDigitsControlString;
+        List<String> controls = new ArrayList<>();
 
-
-        summingNumbers(password);
-
-        lastThreeCharacters(password);
-
-        upperCaseControlString = numbersControlString(control).get(0).intValue();
-        sumDigitsControlString = numbersControlString(control).get(1).intValue();
-
-
-        Integer isSumDigitsControlString = summingNumbers(password).stream()
-                .filter(num -> num.intValue() == sumDigitsControlString)
-                .findAny().orElse(0);
-
-
-
-        Integer isUpperCaseControlString = isUpperCase(password).stream()
-                .filter(num -> num.intValue() == upperCaseControlString)
-                .findAny().orElse(0);
-
-        String threeLetters = control.replaceAll("\\d", "");
-
-
-
-
-
-
-        return "";
+        String findPassword = "";
+        for (int i = 0; i < password.length; i++) {
+            controls.add(isUpperCase(password).get(i) + lastThreeCharacters(password, control).get(i) + summingNumbers(password).get(i));
+            if (control.equals(controls.get(i))) {
+                findPassword = password[i];
+            }
+        }
+        System.out.println(findPassword);
+        return findPassword;
     }
 
 
-// pattern for number
-
-        // pattern for letters
-
-
-//        String pas1 = "20PassWORd20";
-//        // regular expresion for Upper Letters
-//        String numberUpperCase = control.substring(0, 1);
-//        String matchUpCase = String.format(".*[A-Z]{%s}", 2);
-//
-//        //regular expresion for last three letters
-//        StringBuilder stringBuilder = new StringBuilder(control.substring(1,4));
-//        String matchEndThreeWord = String.format("ord", stringBuilder.reverse());
-//
-//        //regular expresion for sum Number about password equals to control sequence .
-//        double sumNumber = 0;
-//        for (int i=0;i<pas1.length();i++){
-//            if (Character.isDigit(pas1.charAt(i))){
-//              char  isDigit = pas1.charAt(i);
-//                double a= isDigit -'0';
-//               sumNumber+=a;
-//
-//            }
-//
-//
-//        }
-//        String sumNumberPassword = String.valueOf(sumNumber);
-//
-//        String numberForSum = control.substring(control.length()-1);
-//
-//        String s = matchUpCase + matchEndThreeWord + numberForSum;
-//        System.out.println(s);
-//
-//
-//
-//
-//        String pasEndWord = pas1.substring(pas1.length()-3 ,pas1.length());
-//
-//
-//        int i = Integer.parseInt(numberUpperCase);
-//        String partPassword = control.substring(1, 4);
-
-
-
-
-    public static List<Integer> summingNumbers(String password[]) {
-
-
+    public static List<String> summingNumbers(String password[]) {
         List<Integer> sumNumbers = new ArrayList<>();
         Pattern separationNumberTab = Pattern.compile("\\d+");
         for (String number : password) {
@@ -109,7 +44,12 @@ public class Password {
             }
             sumNumbers.add(sum);
         }
-        return sumNumbers;
+        List<String> collect = sumNumbers.stream()
+                .map(String::valueOf)
+                .map(String::toString)
+                .collect(Collectors.toList());
+
+        return collect;
 
     }
 
@@ -129,14 +69,17 @@ public class Password {
 
     }
 
-    public static List<Integer> isUpperCase(String[]password){
-        List<Integer> collect = Arrays.stream(password).map(up -> up.replaceAll("[^A-Z]", ""))
+    public static List<String> isUpperCase(String[] password) {
+        List<String> collect = Arrays.stream(password).map(up -> up.replaceAll("[^A-Z]", ""))
                 .map(num -> num.length())
+                .map(String::valueOf)
+                .map(String::toString)
                 .collect(Collectors.toList());
+
         return collect;
     }
 
-    public static List<String> lastThreeCharacters(String[]password){
+    public static List<String> lastThreeCharacters(String[] password, String control) {
 
         List<String> collect = Arrays.stream(password)
                 .map(last -> last.replaceAll("\\d", ""))
@@ -145,6 +88,10 @@ public class Password {
                 .map(StringBuilder::toString)
                 .collect(Collectors.toList());
 
+
+        String threeLetters = control.replaceAll("\\d", "");
+
+
         return collect;
     }
-  }
+}
