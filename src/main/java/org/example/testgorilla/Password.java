@@ -15,13 +15,20 @@ import java.util.stream.Collectors;
  */
 public class Password {
     public static void main(String[] args) {
-        Password.controlStringPasswords(new String[]{"P@sswOD7", "20PassW20", "PASS6word"}, "4dro6");
+        Password.controlStringPasswords(new String[]{"P@sswOD7", "20PassW20", "PASS6word"}, "4dr5o6");
     }
 
     public static String controlStringPasswords(String password[], String control) {
+        Pattern pattern = Pattern.compile("[0-9][^0-9]+[0-9]");
+        Matcher matcher = pattern.matcher(control);
+        String findPassword = "";
+        if (matcher.find()!=true){
+            return findPassword;
+        }
+
         List<String> controls = new ArrayList<>();
 
-        String findPassword = "";
+
         for (int i = 0; i < password.length; i++) {
             controls.add(isUpperCase(password).get(i) + lastThreeCharacters(password, control).get(i) + summingNumbers(password).get(i));
             if (control.equals(controls.get(i))) {
